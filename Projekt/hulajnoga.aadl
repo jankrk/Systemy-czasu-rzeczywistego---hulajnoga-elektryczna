@@ -1,0 +1,155 @@
+package hulajnoga
+public
+	
+-- Definicja procesora Real_Time
+processor Real_Time
+  features
+    BA1: requires bus access Mag.Standard; -- Wymaga dostępu do magistrali Mag.Standard
+end Real_Time;
+processor implementation Real_Time.one_GHz
+end Real_Time.one_GHz;
+
+-- Definicja pamięci RAM
+memory RAM
+  features
+    BA1: requires bus access Mag.Standard; -- Wymaga dostępu do magistrali Mag.Standard
+end RAM;
+
+memory implementation RAM.Standard
+end RAM.Standard;
+
+-- Definicja magistrali Mag
+bus Mag
+end Mag;
+
+bus implementation Mag.Standard
+end Mag.Standard;
+
+
+
+-- Definicja urządzenia czujnika prędkości
+device sensor
+    features
+        sensor_data: out data port; -- Port danych wyjściowych dla danych z czujnika prędkości
+		BA1: requires bus access Mag.Standard; -- Wymaga dostępu do magistrali Mag.Standard
+end sensor;
+
+device implementation sensor.speed
+end sensor.speed;
+
+-- Definicja interfejsu pilota (manetka)
+device interface
+    features
+        set_speed: out data port;    -- Port danych wyjściowych do ustawiania prędkości
+        disengage: out event port;   -- Port zdarzeń wyjściowych do odłączenia napędu
+		BA1: requires bus access Mag.Standard; -- Wymaga dostępu do magistrali Mag.Standard
+end interface;
+
+device implementation interface.pilot
+end interface.pilot;
+
+-- Definicja procesu kontroli
+process control
+    features
+        command_data: out data port; -- Port danych wyjściowych dla danych sterujących
+        sensor_data: in data port;   -- Port danych wejściowych dla danych z czujnika prędkości
+        set_speed: in data port;     -- Port danych wejściowych do ustawiania prędkości
+        disengage: in event port;    -- Port zdarzeń wejściowych do odłączenia napędu
+end control;
+
+process implementation control.speed
+  subcomponents
+    scale_speed_data: thread read_data.speed;      -- Podkomponent: wątek do skalowania danych prędkości
+    speed_control_laws: thread control_laws.speed; -- Podkomponent: wątek praw sterujących prędkością
+  connections
+    DC1: port sensor_data -> scale_speed_data.sensor_data;    -- Połączenie: dane z czujnika prędkości do wątku skalującego dane
+    DC2: port scale_speed_data.proc_data -> 
+         speed_control_laws.proc_data;                        -- Połączenie: przetworzone dane z wątku skalującego do wątku praw sterujących
+    DC3: port speed_control_laws.cmd -> command_data;         -- Połączenie: polecenia sterujące z wątku praw sterujących do procesu kontrolnego
+    EC1: port disengage -> speed_control_laws.disengage;      -- Połączenie: zdarzenia odłączenia napędu do wątku praw sterujących
+    DC4: port set_speed -> speed_control_laws.set_speed;      -- Połączenie: ustawienie prędkości z interfejsu pilota do wątku praw sterujących
+end control.speed;
+
+-- Definicja urządzenia siłownika (kontrolera silnika)
+device actuator
+    features
+        cmd: in data port;           -- Port danych wejściowych dla poleceń sterujących
+		BA1: requires bus access Mag.Standard; -- Wymaga dostępu do magistrali Mag.Standard
+end actuator;
+
+device implementation actuator.speed
+end actuator.speed;
+
+-- Wątek do odczytu danych
+thread read_data
+  features
+    sensor_data: in data port;  -- Port danych wejściowych dla danych z czujnika prędkości
+    proc_data: out data port;   -- Port danych wyjściowych dla przetworzonych danych
+  properties
+    Dispatch_Protocol => Periodic;  -- Protokół wysyłania danych
+    Compute_Execution_Time => 1 ms .. 2 ms;
+    Period => 50 ms;                 -- Okres wysyłania danych (co 50 ms)
+end read_data;
+
+thread implementation read_data.speed
+end read_data.speed;
+
+-- Wątek praw sterujących
+thread control_laws
+  features
+    proc_data: in data port;       -- Port danych wejściowych dla przetworzonych danych
+    cmd: out data port;            -- Port danych wyjściowych dla poleceń sterujących
+    disengage: in event port;      -- Port zdarzeń wejściowych do odłączenia napędu
+    set_speed: in data port;       -- Port danych wejściowych do ustawiania prędkości
+  properties
+    Dispatch_Protocol => Periodic; -- Protokół wysyłania danych
+    Compute_Execution_Time => 3 ms .. 5 ms;
+    Period => 50 ms;                -- Okres wysyłania danych (co 50 ms)
+end Control_laws;
+
+thread implementation control_laws.speed
+end control_laws.speed;
+
+-- Definicja systemu
+system Complete
+end Complete;
+
+-- Implementacja systemu Complete z kontrolą prędkości
+system implementation Complete.speed_control
+  subcomponents
+    speed_sensor: device sensor.speed;           -- Podkomponent: czujnik prędkości
+    throttle: device actuator.speed;             -- Podkomponent: siłownik (kontroler silnika)
+    speed_control: process control.speed;        -- Podkomponent: proces kontrolny
+    interface_unit: device interface.pilot;      -- Podkomponent: interfejs pilota (manetka)
+    RT_1GHz: processor Real_Time.one_GHz;        -- Podkomponent: procesor Real_Time o częstotliwości 1 GHz
+    Standard_Mag_Bus: bus Mag.Standard;    -- Podkomponent: standardowa magistrala Mag
+    Stand_Memory: memory RAM.Standard;           -- Podkomponent: standardowa pamięć RAM
+  connections
+    DC1: port speed_sensor.sensor_data ->        -- Połączenie: dane z czujnika prędkości do procesu kontrolnego
+         speed_control.sensor_data;
+    DC2: port speed_control.command_data ->      -- Połączenie: polecenia z procesu kontrolnego do siłownika
+         throttle.cmd;
+    DC3: port interface_unit.set_speed ->        -- Połączenie: ustawienie prędkości z interfejsu pilota do procesu kontrolnego
+         speed_control.set_speed;
+    EC4: port interface_unit.disengage ->        -- Połączenie: odłączenie napędu z interfejsu pilota do procesu kontrolnego
+         speed_control.disengage;
+    BAC1: bus access Standard_Mag_Bus <->     -- Dostęp do magistrali dla danych z czujnika prędkości
+          speed_sensor.BA1;
+    BAC2: bus access Standard_Mag_Bus <->     -- Dostęp do magistrali dla procesora Real_Time
+          RT_1GHz.BA1;
+    BAC3: bus access Standard_Mag_Bus <->     -- Dostęp do magistrali dla siłownika
+          throttle.BA1;
+    BAC4: bus access Standard_Mag_Bus <->     -- Dostęp do magistrali dla interfejsu pilota
+          interface_unit.BA1;
+    BAC5: bus access Standard_Mag_Bus <->     -- Dostęp do magistrali dla pamięci RAM
+          Stand_Memory.BA1;
+  properties
+ 	Allowed_Processor_Binding => (reference(RT_1GHz))
+	 	applies to speed_control.speed_control_laws;
+	Allowed_Processor_Binding => (reference(RT_1GHz))
+	    applies to speed_control.scale_speed_data;
+	Actual_Memory_Binding => (reference(Stand_Memory))
+	    applies to speed_control;
+end Complete.speed_control;
+
+end hulajnoga;

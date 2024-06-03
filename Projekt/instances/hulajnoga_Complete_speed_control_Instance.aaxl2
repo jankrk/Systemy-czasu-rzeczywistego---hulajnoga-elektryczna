@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aadl2="http://aadl.info/AADL/2.0" xmlns:instance="http://aadl.info/AADL/2.0/instance">
+  <instance:SystemInstance name="Complete_speed_control_Instance" category="system">
+    <componentInstance name="Standard_Mag_Bus" category="bus">
+      <subcomponent xsi:type="aadl2:BusSubcomponent" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedBusSubcomponent.0"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:BusImplementation" href="../hulajnoga.aadl#hulajnoga.Mag.Standard"/>
+    </componentInstance>
+    <componentInstance name="speed_sensor" category="device">
+      <featureInstance name="sensor_data" direction="out">
+        <feature xsi:type="aadl2:DataPort" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedDataPort.0"/>
+      </featureInstance>
+      <featureInstance name="BA1" category="busAccess" type="/1">
+        <feature xsi:type="aadl2:BusAccess" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedBusAccess.0"/>
+      </featureInstance>
+      <subcomponent xsi:type="aadl2:DeviceSubcomponent" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedDeviceSubcomponent.0"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:DeviceImplementation" href="../hulajnoga.aadl#hulajnoga.sensor.speed"/>
+    </componentInstance>
+    <componentInstance name="throttle" category="device">
+      <featureInstance name="cmd">
+        <feature xsi:type="aadl2:DataPort" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedDataPort.0"/>
+      </featureInstance>
+      <featureInstance name="BA1" category="busAccess" type="/1">
+        <feature xsi:type="aadl2:BusAccess" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedBusAccess.0"/>
+      </featureInstance>
+      <subcomponent xsi:type="aadl2:DeviceSubcomponent" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedDeviceSubcomponent.1"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:DeviceImplementation" href="../hulajnoga.aadl#hulajnoga.actuator.speed"/>
+    </componentInstance>
+    <componentInstance name="interface_unit" category="device">
+      <featureInstance name="set_speed" direction="out">
+        <feature xsi:type="aadl2:DataPort" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.8/@ownedDataPort.0"/>
+      </featureInstance>
+      <featureInstance name="disengage" category="eventPort" direction="out">
+        <feature xsi:type="aadl2:EventPort" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.8/@ownedEventPort.0"/>
+      </featureInstance>
+      <featureInstance name="BA1" category="busAccess" type="/1">
+        <feature xsi:type="aadl2:BusAccess" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.8/@ownedBusAccess.0"/>
+      </featureInstance>
+      <subcomponent xsi:type="aadl2:DeviceSubcomponent" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedDeviceSubcomponent.2"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:DeviceImplementation" href="../hulajnoga.aadl#hulajnoga.interface.pilot"/>
+    </componentInstance>
+    <componentInstance name="Stand_Memory" category="memory">
+      <featureInstance name="BA1" category="busAccess" type="/1">
+        <feature xsi:type="aadl2:BusAccess" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.2/@ownedBusAccess.0"/>
+      </featureInstance>
+      <subcomponent xsi:type="aadl2:MemorySubcomponent" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedMemorySubcomponent.0"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:MemoryImplementation" href="../hulajnoga.aadl#hulajnoga.RAM.Standard"/>
+    </componentInstance>
+    <componentInstance name="speed_control" category="process">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Memory_Binding"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:ListValue">
+            <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.4"/>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedPropertyAssociation.2"/>
+      </ownedPropertyAssociation>
+      <featureInstance name="command_data" direction="out">
+        <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+          <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Memory_Binding"/>
+          <ownedValue>
+            <ownedValue xsi:type="aadl2:ListValue">
+              <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.4"/>
+            </ownedValue>
+          </ownedValue>
+          <propertyAssociation href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedPropertyAssociation.2"/>
+        </ownedPropertyAssociation>
+        <feature xsi:type="aadl2:DataPort" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.10/@ownedDataPort.0"/>
+      </featureInstance>
+      <featureInstance name="sensor_data">
+        <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+          <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Memory_Binding"/>
+          <ownedValue>
+            <ownedValue xsi:type="aadl2:ListValue">
+              <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.4"/>
+            </ownedValue>
+          </ownedValue>
+          <propertyAssociation href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedPropertyAssociation.2"/>
+        </ownedPropertyAssociation>
+        <feature xsi:type="aadl2:DataPort" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.10/@ownedDataPort.1"/>
+      </featureInstance>
+      <featureInstance name="set_speed">
+        <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+          <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Memory_Binding"/>
+          <ownedValue>
+            <ownedValue xsi:type="aadl2:ListValue">
+              <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.4"/>
+            </ownedValue>
+          </ownedValue>
+          <propertyAssociation href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedPropertyAssociation.2"/>
+        </ownedPropertyAssociation>
+        <feature xsi:type="aadl2:DataPort" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.10/@ownedDataPort.2"/>
+      </featureInstance>
+      <featureInstance name="disengage" category="eventPort">
+        <feature xsi:type="aadl2:EventPort" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.10/@ownedEventPort.0"/>
+      </featureInstance>
+      <componentInstance name="scale_speed_data" category="thread">
+        <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+          <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Allowed_Processor_Binding"/>
+          <ownedValue>
+            <ownedValue xsi:type="aadl2:ListValue">
+              <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.6"/>
+            </ownedValue>
+          </ownedValue>
+          <propertyAssociation href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedPropertyAssociation.1"/>
+        </ownedPropertyAssociation>
+        <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+          <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Memory_Binding"/>
+          <ownedValue>
+            <ownedValue xsi:type="aadl2:ListValue">
+              <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.4"/>
+            </ownedValue>
+          </ownedValue>
+          <propertyAssociation href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedPropertyAssociation.2"/>
+        </ownedPropertyAssociation>
+        <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+          <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Thread_Properties.aadl#Thread_Properties.Dispatch_Protocol"/>
+          <ownedValue>
+            <ownedValue xsi:type="aadl2:NamedValue">
+              <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.3/@ownedLiteral.0"/>
+            </ownedValue>
+          </ownedValue>
+          <propertyAssociation href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.14/@ownedPropertyAssociation.0"/>
+        </ownedPropertyAssociation>
+        <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+          <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Compute_Execution_Time"/>
+          <ownedValue>
+            <ownedValue xsi:type="aadl2:RangeValue">
+              <minimum xsi:type="aadl2:IntegerLiteral" value="1">
+                <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+              </minimum>
+              <maximum xsi:type="aadl2:IntegerLiteral" value="2">
+                <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+              </maximum>
+            </ownedValue>
+          </ownedValue>
+          <propertyAssociation href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.14/@ownedPropertyAssociation.1"/>
+        </ownedPropertyAssociation>
+        <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+          <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Period"/>
+          <ownedValue>
+            <ownedValue xsi:type="aadl2:IntegerLiteral" value="50">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+            </ownedValue>
+          </ownedValue>
+          <propertyAssociation href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.14/@ownedPropertyAssociation.2"/>
+        </ownedPropertyAssociation>
+        <featureInstance name="sensor_data">
+          <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+            <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Memory_Binding"/>
+            <ownedValue>
+              <ownedValue xsi:type="aadl2:ListValue">
+                <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.4"/>
+              </ownedValue>
+            </ownedValue>
+            <propertyAssociation href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedPropertyAssociation.2"/>
+          </ownedPropertyAssociation>
+          <feature xsi:type="aadl2:DataPort" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.14/@ownedDataPort.0"/>
+        </featureInstance>
+        <featureInstance name="proc_data" direction="out">
+          <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+            <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Memory_Binding"/>
+            <ownedValue>
+              <ownedValue xsi:type="aadl2:ListValue">
+                <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.4"/>
+              </ownedValue>
+            </ownedValue>
+            <propertyAssociation href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedPropertyAssociation.2"/>
+          </ownedPropertyAssociation>
+          <feature xsi:type="aadl2:DataPort" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.14/@ownedDataPort.1"/>
+        </featureInstance>
+        <subcomponent xsi:type="aadl2:ThreadSubcomponent" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedThreadSubcomponent.0"/>
+        <index>0</index>
+        <classifier xsi:type="aadl2:ThreadImplementation" href="../hulajnoga.aadl#hulajnoga.read_data.speed"/>
+      </componentInstance>
+      <componentInstance name="speed_control_laws" category="thread">
+        <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+          <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Allowed_Processor_Binding"/>
+          <ownedValue>
+            <ownedValue xsi:type="aadl2:ListValue">
+              <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.6"/>
+            </ownedValue>
+          </ownedValue>
+          <propertyAssociation href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedPropertyAssociation.0"/>
+        </ownedPropertyAssociation>
+        <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+          <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Memory_Binding"/>
+          <ownedValue>
+            <ownedValue xsi:type="aadl2:ListValue">
+              <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.4"/>
+            </ownedValue>
+          </ownedValue>
+          <propertyAssociation href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedPropertyAssociation.2"/>
+        </ownedPropertyAssociation>
+        <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+          <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Thread_Properties.aadl#Thread_Properties.Dispatch_Protocol"/>
+          <ownedValue>
+            <ownedValue xsi:type="aadl2:NamedValue">
+              <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.3/@ownedLiteral.0"/>
+            </ownedValue>
+          </ownedValue>
+          <propertyAssociation href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.16/@ownedPropertyAssociation.0"/>
+        </ownedPropertyAssociation>
+        <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+          <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Compute_Execution_Time"/>
+          <ownedValue>
+            <ownedValue xsi:type="aadl2:RangeValue">
+              <minimum xsi:type="aadl2:IntegerLiteral" value="3">
+                <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+              </minimum>
+              <maximum xsi:type="aadl2:IntegerLiteral" value="5">
+                <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+              </maximum>
+            </ownedValue>
+          </ownedValue>
+          <propertyAssociation href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.16/@ownedPropertyAssociation.1"/>
+        </ownedPropertyAssociation>
+        <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+          <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Period"/>
+          <ownedValue>
+            <ownedValue xsi:type="aadl2:IntegerLiteral" value="50">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+            </ownedValue>
+          </ownedValue>
+          <propertyAssociation href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.16/@ownedPropertyAssociation.2"/>
+        </ownedPropertyAssociation>
+        <featureInstance name="proc_data">
+          <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+            <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Memory_Binding"/>
+            <ownedValue>
+              <ownedValue xsi:type="aadl2:ListValue">
+                <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.4"/>
+              </ownedValue>
+            </ownedValue>
+            <propertyAssociation href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedPropertyAssociation.2"/>
+          </ownedPropertyAssociation>
+          <feature xsi:type="aadl2:DataPort" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.16/@ownedDataPort.0"/>
+        </featureInstance>
+        <featureInstance name="cmd" direction="out">
+          <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+            <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Memory_Binding"/>
+            <ownedValue>
+              <ownedValue xsi:type="aadl2:ListValue">
+                <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.4"/>
+              </ownedValue>
+            </ownedValue>
+            <propertyAssociation href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedPropertyAssociation.2"/>
+          </ownedPropertyAssociation>
+          <feature xsi:type="aadl2:DataPort" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.16/@ownedDataPort.1"/>
+        </featureInstance>
+        <featureInstance name="set_speed">
+          <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+            <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Memory_Binding"/>
+            <ownedValue>
+              <ownedValue xsi:type="aadl2:ListValue">
+                <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="/0/@componentInstance.4"/>
+              </ownedValue>
+            </ownedValue>
+            <propertyAssociation href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedPropertyAssociation.2"/>
+          </ownedPropertyAssociation>
+          <feature xsi:type="aadl2:DataPort" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.16/@ownedDataPort.2"/>
+        </featureInstance>
+        <featureInstance name="disengage" category="eventPort">
+          <feature xsi:type="aadl2:EventPort" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.16/@ownedEventPort.0"/>
+        </featureInstance>
+        <subcomponent xsi:type="aadl2:ThreadSubcomponent" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedThreadSubcomponent.1"/>
+        <index>0</index>
+        <classifier xsi:type="aadl2:ThreadImplementation" href="../hulajnoga.aadl#hulajnoga.control_laws.speed"/>
+      </componentInstance>
+      <connectionInstance name="scale_speed_data.proc_data -> speed_control_laws.proc_data" complete="true" kind="portConnection" destination="/0/@componentInstance.5/@componentInstance.1/@featureInstance.0" source="/0/@componentInstance.5/@componentInstance.0/@featureInstance.1">
+        <connectionReference context="/0/@componentInstance.5" source="/0/@componentInstance.5/@componentInstance.0/@featureInstance.1" destination="/0/@componentInstance.5/@componentInstance.1/@featureInstance.0">
+          <connection xsi:type="aadl2:PortConnection" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedPortConnection.1"/>
+        </connectionReference>
+      </connectionInstance>
+      <subcomponent xsi:type="aadl2:ProcessSubcomponent" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedProcessSubcomponent.0"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:ProcessImplementation" href="../hulajnoga.aadl#hulajnoga.control.speed"/>
+    </componentInstance>
+    <componentInstance name="RT_1GHz" category="processor">
+      <featureInstance name="BA1" category="busAccess" type="/1">
+        <feature xsi:type="aadl2:BusAccess" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedBusAccess.0"/>
+      </featureInstance>
+      <subcomponent xsi:type="aadl2:ProcessorSubcomponent" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedProcessorSubcomponent.0"/>
+      <index>0</index>
+      <classifier xsi:type="aadl2:ProcessorImplementation" href="../hulajnoga.aadl#hulajnoga.Real_Time.one_GHz"/>
+    </componentInstance>
+    <connectionInstance name="Standard_Mag_Bus -> speed_sensor.BA1" complete="true" kind="accessConnection" destination="/0/@componentInstance.1/@featureInstance.1" source="/0/@componentInstance.0">
+      <connectionReference context="/0" source="/0/@componentInstance.0" destination="/0/@componentInstance.1/@featureInstance.1">
+        <connection xsi:type="aadl2:AccessConnection" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedAccessConnection.0"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="Standard_Mag_Bus -> RT_1GHz.BA1" complete="true" kind="accessConnection" destination="/0/@componentInstance.6/@featureInstance.0" source="/0/@componentInstance.0">
+      <connectionReference context="/0" source="/0/@componentInstance.0" destination="/0/@componentInstance.6/@featureInstance.0">
+        <connection xsi:type="aadl2:AccessConnection" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedAccessConnection.1"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="Standard_Mag_Bus -> throttle.BA1" complete="true" kind="accessConnection" destination="/0/@componentInstance.2/@featureInstance.1" source="/0/@componentInstance.0">
+      <connectionReference context="/0" source="/0/@componentInstance.0" destination="/0/@componentInstance.2/@featureInstance.1">
+        <connection xsi:type="aadl2:AccessConnection" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedAccessConnection.2"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="Standard_Mag_Bus -> interface_unit.BA1" complete="true" kind="accessConnection" destination="/0/@componentInstance.3/@featureInstance.2" source="/0/@componentInstance.0">
+      <connectionReference context="/0" source="/0/@componentInstance.0" destination="/0/@componentInstance.3/@featureInstance.2">
+        <connection xsi:type="aadl2:AccessConnection" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedAccessConnection.3"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="Standard_Mag_Bus -> Stand_Memory.BA1" complete="true" kind="accessConnection" destination="/0/@componentInstance.4/@featureInstance.0" source="/0/@componentInstance.0">
+      <connectionReference context="/0" source="/0/@componentInstance.0" destination="/0/@componentInstance.4/@featureInstance.0">
+        <connection xsi:type="aadl2:AccessConnection" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedAccessConnection.4"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="speed_sensor.sensor_data -> speed_control.scale_speed_data.sensor_data" complete="true" kind="portConnection" destination="/0/@componentInstance.5/@componentInstance.0/@featureInstance.0" source="/0/@componentInstance.1/@featureInstance.0">
+      <connectionReference context="/0" source="/0/@componentInstance.1/@featureInstance.0" destination="/0/@componentInstance.5/@featureInstance.1">
+        <connection xsi:type="aadl2:PortConnection" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedPortConnection.0"/>
+      </connectionReference>
+      <connectionReference context="/0/@componentInstance.5" source="/0/@componentInstance.5/@featureInstance.1" destination="/0/@componentInstance.5/@componentInstance.0/@featureInstance.0">
+        <connection xsi:type="aadl2:PortConnection" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedPortConnection.0"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="speed_sensor.BA1 -> Standard_Mag_Bus" complete="true" kind="accessConnection" destination="/0/@componentInstance.0" source="/0/@componentInstance.1/@featureInstance.1">
+      <connectionReference context="/0" source="/0/@componentInstance.1/@featureInstance.1" destination="/0/@componentInstance.0" reverse="true">
+        <connection xsi:type="aadl2:AccessConnection" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedAccessConnection.0"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="throttle.BA1 -> Standard_Mag_Bus" complete="true" kind="accessConnection" destination="/0/@componentInstance.0" source="/0/@componentInstance.2/@featureInstance.1">
+      <connectionReference context="/0" source="/0/@componentInstance.2/@featureInstance.1" destination="/0/@componentInstance.0" reverse="true">
+        <connection xsi:type="aadl2:AccessConnection" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedAccessConnection.2"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="interface_unit.set_speed -> speed_control.speed_control_laws.set_speed" complete="true" kind="portConnection" destination="/0/@componentInstance.5/@componentInstance.1/@featureInstance.2" source="/0/@componentInstance.3/@featureInstance.0">
+      <connectionReference context="/0" source="/0/@componentInstance.3/@featureInstance.0" destination="/0/@componentInstance.5/@featureInstance.2">
+        <connection xsi:type="aadl2:PortConnection" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedPortConnection.2"/>
+      </connectionReference>
+      <connectionReference context="/0/@componentInstance.5" source="/0/@componentInstance.5/@featureInstance.2" destination="/0/@componentInstance.5/@componentInstance.1/@featureInstance.2">
+        <connection xsi:type="aadl2:PortConnection" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedPortConnection.4"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="interface_unit.disengage -> speed_control.speed_control_laws.disengage" complete="true" kind="portConnection" destination="/0/@componentInstance.5/@componentInstance.1/@featureInstance.3" source="/0/@componentInstance.3/@featureInstance.1">
+      <connectionReference context="/0" source="/0/@componentInstance.3/@featureInstance.1" destination="/0/@componentInstance.5/@featureInstance.3">
+        <connection xsi:type="aadl2:PortConnection" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedPortConnection.3"/>
+      </connectionReference>
+      <connectionReference context="/0/@componentInstance.5" source="/0/@componentInstance.5/@featureInstance.3" destination="/0/@componentInstance.5/@componentInstance.1/@featureInstance.3">
+        <connection xsi:type="aadl2:PortConnection" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedPortConnection.3"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="interface_unit.BA1 -> Standard_Mag_Bus" complete="true" kind="accessConnection" destination="/0/@componentInstance.0" source="/0/@componentInstance.3/@featureInstance.2">
+      <connectionReference context="/0" source="/0/@componentInstance.3/@featureInstance.2" destination="/0/@componentInstance.0" reverse="true">
+        <connection xsi:type="aadl2:AccessConnection" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedAccessConnection.3"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="Stand_Memory.BA1 -> Standard_Mag_Bus" complete="true" kind="accessConnection" destination="/0/@componentInstance.0" source="/0/@componentInstance.4/@featureInstance.0">
+      <connectionReference context="/0" source="/0/@componentInstance.4/@featureInstance.0" destination="/0/@componentInstance.0" reverse="true">
+        <connection xsi:type="aadl2:AccessConnection" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedAccessConnection.4"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="speed_control.speed_control_laws.cmd -> throttle.cmd" complete="true" kind="portConnection" destination="/0/@componentInstance.2/@featureInstance.0" source="/0/@componentInstance.5/@componentInstance.1/@featureInstance.1">
+      <connectionReference context="/0/@componentInstance.5" source="/0/@componentInstance.5/@componentInstance.1/@featureInstance.1" destination="/0/@componentInstance.5/@featureInstance.0">
+        <connection xsi:type="aadl2:PortConnection" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedPortConnection.2"/>
+      </connectionReference>
+      <connectionReference context="/0" source="/0/@componentInstance.5/@featureInstance.0" destination="/0/@componentInstance.2/@featureInstance.0">
+        <connection xsi:type="aadl2:PortConnection" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedPortConnection.1"/>
+      </connectionReference>
+    </connectionInstance>
+    <connectionInstance name="RT_1GHz.BA1 -> Standard_Mag_Bus" complete="true" kind="accessConnection" destination="/0/@componentInstance.0" source="/0/@componentInstance.6/@featureInstance.0">
+      <connectionReference context="/0" source="/0/@componentInstance.6/@featureInstance.0" destination="/0/@componentInstance.0" reverse="true">
+        <connection xsi:type="aadl2:AccessConnection" href="../hulajnoga.aadl#/0/@ownedPublicSection/@ownedClassifier.19/@ownedAccessConnection.1"/>
+      </connectionReference>
+    </connectionInstance>
+    <classifier xsi:type="aadl2:SystemImplementation" href="../hulajnoga.aadl#hulajnoga.Complete.speed_control"/>
+    <systemOperationMode name="No Modes"/>
+    <componentImplementation xsi:type="aadl2:SystemImplementation" href="../hulajnoga.aadl#hulajnoga.Complete.speed_control"/>
+  </instance:SystemInstance>
+  <instance:ComponentInstance name="hulajnoga::Mag.Standard" category="bus">
+    <classifier xsi:type="aadl2:BusImplementation" href="../hulajnoga.aadl#hulajnoga.Mag.Standard"/>
+  </instance:ComponentInstance>
+</xmi:XMI>
