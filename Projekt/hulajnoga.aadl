@@ -1,155 +1,251 @@
 package hulajnoga
 public
-	
+	with Data_Model;
+	with SEI;
+
 -- Definicja procesora Real_Time
-processor Real_Time
-  features
-    BA1: requires bus access Mag.Standard; -- Wymaga dostępu do magistrali Mag.Standard
-end Real_Time;
-processor implementation Real_Time.one_GHz
-end Real_Time.one_GHz;
+	processor Real_Time
+		features
+			BA1: requires bus access Mag.Standard;
+			BU1: requires bus access RMag.Standard;
+		properties
+			Scheduling_Protocol => (Round_Robin_Protocol);
+			Clock_Period => 1 ms;	
+	        Timing_Properties::Processor_Capacity => 1.0 MIPS;
+	        SEI::MIPSCapacity => 1.2 mips;
+	end Real_Time;
+
+	processor implementation Real_Time.one_GHz
+	end Real_Time.one_GHz;
+
+-- Definicja pamięci SSD_Drive
+	memory SSD_Drive
+		features
+			BA1: requires bus access Mag.Standard;
+	end SSD_Drive;
+
+	memory implementation SSD_Drive.Standard
+	end SSD_Drive.Standard;
 
 -- Definicja pamięci RAM
-memory RAM
-  features
-    BA1: requires bus access Mag.Standard; -- Wymaga dostępu do magistrali Mag.Standard
-end RAM;
+	memory RAM
+		features
+			BU1: requires bus access RMag.Standard;
+	end RAM;
 
-memory implementation RAM.Standard
-end RAM.Standard;
+	memory implementation RAM.Standard
+	end RAM.Standard;
+
+-- Definicja magistrali Mag (RAM)
+	bus RMag
+		properties
+			Transmission_Time => [Fixed => 1ns .. 2ns; PerByte => 5ns .. 6ns;];
+			Period => 1ms;
+			SEI::BandWidthCapacity => 2.0 MBytesps;
+			SEI::BandWidthBudget => 200.0 KBytesps;
+	end RMag;
+
+	bus implementation RMag.Standard
+	end RMag.Standard;
 
 -- Definicja magistrali Mag
-bus Mag
-end Mag;
+	bus Mag
+		properties
+			Transmission_Time => [Fixed => 1ns .. 2ns; PerByte => 5ns .. 6ns;];
+			Period => 1ms;
+			SEI::BandWidthCapacity => 2.0 MBytesps;
+			SEI::BandWidthBudget => 200.0 KBytesps;
+	end Mag;
 
-bus implementation Mag.Standard
-end Mag.Standard;
+	bus implementation Mag.Standard
+	end Mag.Standard;
 
+-- Data set_speed_value
+	data set_speed_value
+		properties
+			Data_Model::Data_Representation => Float;
+	end set_speed_value;
 
+-- Data sensor_data_value
+	data sensor_data_value
+	end sensor_data_value;
+
+-- Data status_value
+	data status_value
+	end status_value;
+
+-- Data command_data_value
+	data command_data_value
+	end command_data_value;
+
+-- Data proc_data_value
+	data proc_data_value
+	end proc_data_value;
 
 -- Definicja urządzenia czujnika prędkości
-device sensor
-    features
-        sensor_data: out data port; -- Port danych wyjściowych dla danych z czujnika prędkości
-		BA1: requires bus access Mag.Standard; -- Wymaga dostępu do magistrali Mag.Standard
-end sensor;
+	device sensor
+		features
+			sensor_data: out data port sensor_data_value;
+			BA1: requires bus access Mag.Standard;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 20ms;	
+	end sensor;
 
-device implementation sensor.speed
-end sensor.speed;
+	device implementation sensor.speed
+	end sensor.speed;
 
 -- Definicja interfejsu pilota (manetka)
-device interface
-    features
-        set_speed: out data port;    -- Port danych wyjściowych do ustawiania prędkości
-        disengage: out event port;   -- Port zdarzeń wyjściowych do odłączenia napędu
-		BA1: requires bus access Mag.Standard; -- Wymaga dostępu do magistrali Mag.Standard
-end interface;
+	device interface
+		features
+			set_speed: out data port set_speed_value;
+			disengage: out event port;
+			control_on: out event port;
+			BA1: requires bus access Mag.Standard;
+		flows
+			on_flow_src: flow source set_speed {latency => 5ms .. 5ms;};
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 20ms;	
+	end interface;
 
-device implementation interface.pilot
-end interface.pilot;
+	device implementation interface.pilot
+	end interface.pilot;
 
--- Definicja procesu kontroli
-process control
-    features
-        command_data: out data port; -- Port danych wyjściowych dla danych sterujących
-        sensor_data: in data port;   -- Port danych wejściowych dla danych z czujnika prędkości
-        set_speed: in data port;     -- Port danych wejściowych do ustawiania prędkości
-        disengage: in event port;    -- Port zdarzeń wejściowych do odłączenia napędu
-end control;
+-- Definicja ekranu 
+	device display_unit
+		features
+			status: in data port status_value;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 20ms;	
+	end display_unit;
 
-process implementation control.speed
-  subcomponents
-    scale_speed_data: thread read_data.speed;      -- Podkomponent: wątek do skalowania danych prędkości
-    speed_control_laws: thread control_laws.speed; -- Podkomponent: wątek praw sterujących prędkością
-  connections
-    DC1: port sensor_data -> scale_speed_data.sensor_data;    -- Połączenie: dane z czujnika prędkości do wątku skalującego dane
-    DC2: port scale_speed_data.proc_data -> 
-         speed_control_laws.proc_data;                        -- Połączenie: przetworzone dane z wątku skalującego do wątku praw sterujących
-    DC3: port speed_control_laws.cmd -> command_data;         -- Połączenie: polecenia sterujące z wątku praw sterujących do procesu kontrolnego
-    EC1: port disengage -> speed_control_laws.disengage;      -- Połączenie: zdarzenia odłączenia napędu do wątku praw sterujących
-    DC4: port set_speed -> speed_control_laws.set_speed;      -- Połączenie: ustawienie prędkości z interfejsu pilota do wątku praw sterujących
-end control.speed;
+	device implementation display_unit.screen
+	end display_unit.screen;
 
 -- Definicja urządzenia siłownika (kontrolera silnika)
-device actuator
-    features
-        cmd: in data port;           -- Port danych wejściowych dla poleceń sterujących
-		BA1: requires bus access Mag.Standard; -- Wymaga dostępu do magistrali Mag.Standard
-end actuator;
+	device actuator
+		features
+			cmd: in data port command_data_value;
+			BA1: requires bus access Mag.Standard;
+		flows
+			on_flow_snk: flow sink cmd {latency => 8ms .. 8ms;};
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 20ms;	
+	end actuator;
 
-device implementation actuator.speed
-end actuator.speed;
+	device implementation actuator.speed
+	end actuator.speed;
+
+-- Definicja procesu kontroli
+	process control
+		features
+			command_data: out data port command_data_value;
+			sensor_data: in data port sensor_data_value;
+			status: out data port status_value;
+			set_speed: in data port set_speed_value;
+			disengage: in event port;
+			control_on: in event port;
+		flows
+			on_flow_path: flow path set_speed -> command_data {latency => 10ms .. 20ms;};
+		properties
+			Period => 50Ms;
+			SEI::MIPSBudget => 0.8 mips;
+	end control;
+
+	process implementation control.speed
+		subcomponents
+			scale_speed_data: thread read_data.speed;
+			speed_control_laws: thread control_laws.speed;
+		connections
+			DC1: port sensor_data -> scale_speed_data.sensor_data;
+			DC2: port scale_speed_data.proc_data -> speed_control_laws.proc_data;
+			DC3: port speed_control_laws.cmd -> command_data;
+			DC4: port set_speed -> speed_control_laws.set_speed;
+			DC5: port speed_control_laws.status -> status;
+			EC1: port disengage -> speed_control_laws.disengage;
+			EC2: port control_on -> speed_control_laws.control_on;
+		flows
+			on_flow_path: flow path set_speed -> DC4 -> speed_control_laws -> DC3 -> command_data;
+	end control.speed;
 
 -- Wątek do odczytu danych
-thread read_data
-  features
-    sensor_data: in data port;  -- Port danych wejściowych dla danych z czujnika prędkości
-    proc_data: out data port;   -- Port danych wyjściowych dla przetworzonych danych
-  properties
-    Dispatch_Protocol => Periodic;  -- Protokół wysyłania danych
-    Compute_Execution_Time => 1 ms .. 2 ms;
-    Period => 50 ms;                 -- Okres wysyłania danych (co 50 ms)
-end read_data;
+	thread read_data
+		features
+			sensor_data: in data port sensor_data_value;
+			proc_data: out data port proc_data_value;
+		properties
+			Dispatch_Protocol => Periodic;
+			Compute_Execution_Time => 1ms .. 2ms;
+			Period => 50ms;
+	end read_data;
 
-thread implementation read_data.speed
-end read_data.speed;
+	thread implementation read_data.speed
+	end read_data.speed;
 
 -- Wątek praw sterujących
-thread control_laws
-  features
-    proc_data: in data port;       -- Port danych wejściowych dla przetworzonych danych
-    cmd: out data port;            -- Port danych wyjściowych dla poleceń sterujących
-    disengage: in event port;      -- Port zdarzeń wejściowych do odłączenia napędu
-    set_speed: in data port;       -- Port danych wejściowych do ustawiania prędkości
-  properties
-    Dispatch_Protocol => Periodic; -- Protokół wysyłania danych
-    Compute_Execution_Time => 3 ms .. 5 ms;
-    Period => 50 ms;                -- Okres wysyłania danych (co 50 ms)
-end Control_laws;
+	thread control_laws
+		features
+			proc_data: in data port proc_data_value;
+			cmd: out data port command_data_value;
+			set_speed: in data port set_speed_value;
+			status: out data port status_value;
+			disengage: in event port;
+			control_on: in event port;
+		properties
+			Dispatch_Protocol => Periodic;
+			Compute_Execution_Time => 3ms .. 5ms;
+			Period => 50ms;
+	end control_laws;
 
-thread implementation control_laws.speed
-end control_laws.speed;
+	thread implementation control_laws.speed
+	end control_laws.speed;
 
 -- Definicja systemu
-system Complete
-end Complete;
+	system Complete
+	end Complete;
 
 -- Implementacja systemu Complete z kontrolą prędkości
-system implementation Complete.speed_control
-  subcomponents
-    speed_sensor: device sensor.speed;           -- Podkomponent: czujnik prędkości
-    throttle: device actuator.speed;             -- Podkomponent: siłownik (kontroler silnika)
-    speed_control: process control.speed;        -- Podkomponent: proces kontrolny
-    interface_unit: device interface.pilot;      -- Podkomponent: interfejs pilota (manetka)
-    RT_1GHz: processor Real_Time.one_GHz;        -- Podkomponent: procesor Real_Time o częstotliwości 1 GHz
-    Standard_Mag_Bus: bus Mag.Standard;    -- Podkomponent: standardowa magistrala Mag
-    Stand_Memory: memory RAM.Standard;           -- Podkomponent: standardowa pamięć RAM
-  connections
-    DC1: port speed_sensor.sensor_data ->        -- Połączenie: dane z czujnika prędkości do procesu kontrolnego
-         speed_control.sensor_data;
-    DC2: port speed_control.command_data ->      -- Połączenie: polecenia z procesu kontrolnego do siłownika
-         throttle.cmd;
-    DC3: port interface_unit.set_speed ->        -- Połączenie: ustawienie prędkości z interfejsu pilota do procesu kontrolnego
-         speed_control.set_speed;
-    EC4: port interface_unit.disengage ->        -- Połączenie: odłączenie napędu z interfejsu pilota do procesu kontrolnego
-         speed_control.disengage;
-    BAC1: bus access Standard_Mag_Bus <->     -- Dostęp do magistrali dla danych z czujnika prędkości
-          speed_sensor.BA1;
-    BAC2: bus access Standard_Mag_Bus <->     -- Dostęp do magistrali dla procesora Real_Time
-          RT_1GHz.BA1;
-    BAC3: bus access Standard_Mag_Bus <->     -- Dostęp do magistrali dla siłownika
-          throttle.BA1;
-    BAC4: bus access Standard_Mag_Bus <->     -- Dostęp do magistrali dla interfejsu pilota
-          interface_unit.BA1;
-    BAC5: bus access Standard_Mag_Bus <->     -- Dostęp do magistrali dla pamięci RAM
-          Stand_Memory.BA1;
-  properties
- 	Allowed_Processor_Binding => (reference(RT_1GHz))
-	 	applies to speed_control.speed_control_laws;
-	Allowed_Processor_Binding => (reference(RT_1GHz))
-	    applies to speed_control.scale_speed_data;
-	Actual_Memory_Binding => (reference(Stand_Memory))
-	    applies to speed_control;
-end Complete.speed_control;
+	system implementation Complete.speed_control
+		subcomponents
+			speed_sensor: device sensor.speed;
+			throttle: device actuator.speed;
+			speed_control: process control.speed;
+			interface_unit: device interface.pilot;
+			display_unit: device display_unit.screen;
+			RT_1GHz: processor Real_Time.one_GHz;
+			Standard_Mag_Bus: bus Mag.Standard;
+			RAM_Mag_Bus: bus RMag.Standard;
+			SSD_Memory: memory SSD_Drive.Standard;
+			RAM_Memory: memory RAM.Standard;
+		connections
+			DC1: port speed_sensor.sensor_data -> speed_control.sensor_data;
+			DC2: port speed_control.command_data -> throttle.cmd;
+			DC3: port interface_unit.set_speed -> speed_control.set_speed;
+			EC4: port interface_unit.disengage -> speed_control.disengage;
+			EC5: port interface_unit.control_on -> speed_control.control_on;
+			DC6: port speed_control.status -> display_unit.status;
+			BAC1: bus access Standard_Mag_Bus <-> speed_sensor.BA1;
+			BAC2: bus access Standard_Mag_Bus <-> RT_1GHz.BA1;
+			BAC3: bus access Standard_Mag_Bus <-> throttle.BA1;
+			BAC4: bus access Standard_Mag_Bus <-> interface_unit.BA1;
+			BAC5: bus access Standard_Mag_Bus <-> SSD_Memory.BA1;
+			BUC1: bus access RAM_Mag_Bus <-> RAM_Memory.BU1;
+			BUC2: bus access RAM_Mag_Bus <-> RT_1GHz.BU1;
+		flows
+			on_end_to_end: end to end flow
+	    	interface_unit.on_flow_src -> DC3 -> speed_control.on_flow_path -> DC2 -> throttle.on_flow_snk {
+				Latency => 13ms .. 88ms;};
+		properties
+			Allowed_Processor_Binding => (reference (RT_1GHz))
+		 		applies to speed_control.speed_control_laws;
+			Allowed_Processor_Binding => (reference (RT_1GHz))
+		    	applies to speed_control.scale_speed_data;
+			Actual_Memory_Binding => (reference (SSD_Memory))
+		    	applies to speed_control;
+			SEI::MIPSCapacity => 2.4 mips;
+	end Complete.speed_control;
 
 end hulajnoga;

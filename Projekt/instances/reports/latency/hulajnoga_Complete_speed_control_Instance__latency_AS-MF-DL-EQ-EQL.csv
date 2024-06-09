@@ -1,0 +1,21 @@
+Latency analysis with preference settings: asynchronous system/major partition frame/worst case as deadline/best case as empty queue/queuing latency enabled
+
+"Latency results for end-to-end flow 'on_end_to_end' of system 'Complete.speed_control' "
+
+Result,Min Specified,Min Actual,Min Method,Max Specified,Max Actual,Max Method,Comments
+device interface_unit (source on_flow_src),0.0ms,0.0ms,first sampling,0.0ms,0.0ms,first sampling
+device interface_unit (source on_flow_src),5.0ms,5.0ms,specified,5.0ms,5.0ms,specified
+connection interface_unit.set_speed -> speed_control.speed_control_laws.set_speed,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+thread speed_control.speed_control_laws,0.0ms,0.0ms,sampling,0.0ms,50.0ms,sampling,Best case 0 ms worst case 50.0ms (period) sampling delay
+thread speed_control.speed_control_laws,0.0ms,3.0ms,processing time,0.0ms,5.0ms,processing time,Using execution time as deadline was not set
+connection speed_control.speed_control_laws.cmd -> throttle.cmd,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+device throttle (sink on_flow_snk),0.0ms,0.0ms,sampling,0.0ms,20.0ms,sampling,Best case 0 ms worst case 20.0ms (period) sampling delay
+device throttle (sink on_flow_snk),8.0ms,8.0ms,specified,8.0ms,8.0ms,specified
+Latency Total,13.0ms,16.0ms,,13.0ms,88.0ms
+Specified End To End Latency,,13.0ms,,,88.0ms
+End to end Latency Summary
+INFO,Minimum actual latency total 16.0ms is greater or equal to expected minimum end to end latency 13.0ms
+INFO,Maximum actual latency total 88.0ms is less or equal to expected maximum end to end latency 88.0ms
+
+
+

@@ -1,57 +1,65 @@
 <?xml version="1.0" encoding="ASCII"?>
 <diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
-  <element uuid="db482663-5ebf-4775-9836-bdc81a22065c" manual="true">
-    <element uuid="577facd7-370b-463a-b2f3-58553251aca9" manual="true">
+  <element uuid="40c749ac-c325-4eb6-ac4d-60b9c4d831b6" manual="true">
+    <element uuid="1903292d-2e1e-4c4e-aaf0-1931fe28c4c7" manual="true">
       <bo>
         <seg>classifier</seg>
         <seg>actuator</seg>
       </bo>
-      <position x="252.23046493530273" y="313.0"/>
+      <position x="537.0507774353027" y="258.0"/>
       <size width="105.36588287353516" height="35.0"/>
     </element>
-    <element uuid="e79c41df-9d9a-401a-bd4f-a8efa66119a1" manual="true">
-      <element uuid="b2e75f5a-ec3f-4fd5-99c2-36a758ca5651" manual="true">
+    <element uuid="3318bce3-3bfe-4cd0-a949-9a568c5f14e6" manual="true">
+      <element uuid="440a278b-befa-485a-960e-a4bb9b9a4299" manual="true">
         <bo>
           <seg>realization</seg>
         </bo>
         <bendpoints>
-          <point x="236.23046875" y="330.5"/>
-          <point x="248.23046875" y="330.5"/>
+          <point x="521.05078125" y="275.5"/>
+          <point x="533.05078125" y="275.5"/>
         </bendpoints>
       </element>
       <bo>
         <seg>classifier</seg>
         <seg>actuator.speed</seg>
       </bo>
-      <position x="86.83202743530273" y="313.0"/>
+      <position x="371.65233993530273" y="258.0"/>
       <size width="145.39844512939453" height="35.0"/>
     </element>
-    <element uuid="78c27856-c243-43ca-b177-1f4ecdba5a0c" manual="true">
+    <element uuid="03ab53d4-6fb7-4e24-8302-3626b40cc619" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>command_data_value</seg>
+      </bo>
+      <position x="271.50780868530273" y="93.0"/>
+      <size width="183.1979217529297" height="35.0"/>
+    </element>
+    <element uuid="863da9ca-ca00-414f-8223-7365022b0c8b" manual="true">
       <bo>
         <seg>classifier</seg>
         <seg>Complete</seg>
       </bo>
-      <position x="308.55207443237305" y="533.0"/>
+      <position x="308.55207443237305" y="588.0"/>
       <size width="109.06379318237305" height="35.0"/>
     </element>
-    <element uuid="b089b877-2243-4a05-a84e-4e9f77d9b6b4" manual="true">
-      <element uuid="04004191-b630-41d9-ae09-306bba0e8819" manual="true">
+    <element uuid="ff0cfe0c-7539-4816-9083-822421675856" manual="true">
+      <element uuid="b9bfd0ca-8c17-4e61-bb67-168e37542f03" manual="true">
         <bo>
           <seg>realization</seg>
         </bo>
         <bendpoints>
-          <point x="292.55206298828125" y="550.5"/>
-          <point x="304.55206298828125" y="550.5"/>
+          <point x="292.55206298828125" y="605.5"/>
+          <point x="304.55206298828125" y="605.5"/>
         </bendpoints>
       </element>
       <bo>
         <seg>classifier</seg>
         <seg>Complete.speed_control</seg>
       </bo>
-      <position x="86.83202743530273" y="533.0"/>
+      <position x="86.83202743530273" y="588.0"/>
       <size width="201.7200469970703" height="35.0"/>
     </element>
-    <element uuid="4c5b8342-d22b-4a74-978a-fc9253fd87b8" manual="true">
+    <element uuid="a3de6d27-d655-41d7-97dc-59084ad21eb1" manual="true">
       <bo>
         <seg>classifier</seg>
         <seg>control</seg>
@@ -59,8 +67,8 @@
       <position x="244.07291793823242" y="203.0"/>
       <size width="97.20832824707031" height="35.0"/>
     </element>
-    <element uuid="3385e1d1-b65f-4b4c-a02c-d7b03fc9b3ff" manual="true">
-      <element uuid="b4a433ff-8fd6-4fd4-883d-b42a471cc996" manual="true">
+    <element uuid="e120fc6d-9fe4-486c-8ec8-1aa96aa7c44a" manual="true">
+      <element uuid="35ebb22a-d7b1-4cf6-b74b-77ccc58f011f" manual="true">
         <bo>
           <seg>realization</seg>
         </bo>
@@ -76,7 +84,7 @@
       <position x="86.83202743530273" y="203.0"/>
       <size width="137.2408905029297" height="35.0"/>
     </element>
-    <element uuid="491afe86-4ac2-40f6-990a-019813b07aac" manual="true">
+    <element uuid="e0b7874f-5d2a-40a6-8e6a-ff51829cc1d9" manual="true">
       <bo>
         <seg>classifier</seg>
         <seg>control_laws</seg>
@@ -84,8 +92,8 @@
       <position x="278.1614646911621" y="423.0"/>
       <size width="131.29686737060547" height="35.0"/>
     </element>
-    <element uuid="bce24f4f-58b0-4496-bd56-95b1b75f12d5" manual="true">
-      <element uuid="1627e4f5-33ea-4116-b3e0-8c7bc0dab4b8" manual="true">
+    <element uuid="34208822-ffcf-49d4-892a-7eaba3c32489" manual="true">
+      <element uuid="cc8f7548-8124-47ef-874c-3d9d3c2bb0a9" manual="true">
         <bo>
           <seg>realization</seg>
         </bo>
@@ -101,7 +109,32 @@
       <position x="86.83202743530273" y="423.0"/>
       <size width="171.32942962646484" height="35.0"/>
     </element>
-    <element uuid="53f0b4a7-5e60-4736-9b57-32f134208e5f" manual="true">
+    <element uuid="f3459984-ff13-4557-a575-3668dd07ff78" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>display_unit</seg>
+      </bo>
+      <position x="278.1614646911621" y="368.0"/>
+      <size width="127.60546875" height="35.0"/>
+    </element>
+    <element uuid="8b8d3bf5-5365-49ea-a85b-b8f3ec726e66" manual="true">
+      <element uuid="e59ce164-26fc-4f33-940e-40e36830b300" manual="true">
+        <bo>
+          <seg>realization</seg>
+        </bo>
+        <bendpoints>
+          <point x="262.1614685058594" y="385.5"/>
+          <point x="274.1614685058594" y="385.5"/>
+        </bendpoints>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>display_unit.screen</seg>
+      </bo>
+      <position x="86.83202743530273" y="368.0"/>
+      <size width="171.32942962646484" height="35.0"/>
+    </element>
+    <element uuid="898db22e-911e-484d-84bc-3d368ffc1b47" manual="true">
       <bo>
         <seg>classifier</seg>
         <seg>interface</seg>
@@ -109,8 +142,8 @@
       <position x="243.32421493530273" y="258.0"/>
       <size width="108.32812118530273" height="35.0"/>
     </element>
-    <element uuid="a7820269-0b2e-4eaa-ae52-0f598e4ed777" manual="true">
-      <element uuid="71d53f28-6036-4439-8406-6c5ec47c5e5f" manual="true">
+    <element uuid="847c4d0e-8aca-415c-81e1-bf0648bc8d05" manual="true">
+      <element uuid="d6e1efaa-15ed-42f1-8298-176c71417e6d" manual="true">
         <bo>
           <seg>realization</seg>
         </bo>
@@ -126,82 +159,90 @@
       <position x="86.83202743530273" y="258.0"/>
       <size width="136.49219512939453" height="35.0"/>
     </element>
-    <element uuid="7ed7d4ae-d79a-4305-9919-c044a6f55092" manual="true">
+    <element uuid="9d27a432-50be-4d87-a287-1ced1d2cb89d" manual="true">
       <bo>
         <seg>classifier</seg>
         <seg>Mag</seg>
       </bo>
-      <position x="242.58852767944336" y="38.0"/>
+      <position x="630.462230682373" y="93.0"/>
       <size width="77.9375" height="35.0"/>
     </element>
-    <element uuid="6fb9d8ea-5752-4bf5-8255-adad05483876" manual="true">
-      <element uuid="ef93d0e2-76bd-4d35-960c-0fa0550b722c" manual="true">
+    <element uuid="153374ec-7b60-40b2-9fcd-a54996ea1318" manual="true">
+      <element uuid="82622a2a-f1cd-40f8-aaee-754c0d4461cb" manual="true">
         <bo>
           <seg>realization</seg>
         </bo>
         <bendpoints>
-          <point x="226.58853149414062" y="55.5"/>
-          <point x="238.58853149414062" y="55.5"/>
+          <point x="614.4622192382812" y="110.5"/>
+          <point x="626.4622192382812" y="110.5"/>
         </bendpoints>
       </element>
       <bo>
         <seg>classifier</seg>
         <seg>Mag.Standard</seg>
       </bo>
-      <position x="86.83202743530273" y="38.0"/>
+      <position x="474.7057304382324" y="93.0"/>
       <size width="135.75650787353516" height="35.0"/>
     </element>
-    <element uuid="73d18ca2-617c-4ae1-9631-9c3f07e2f234" manual="true">
+    <element uuid="fcc325b9-00e1-4dcc-a33e-d5aa2f294653" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>proc_data_value</seg>
+      </bo>
+      <position x="233.69530868530273" y="38.0"/>
+      <size width="150.59375" height="35.0"/>
+    </element>
+    <element uuid="681e775e-24c6-4046-aa09-df410da92a55" manual="true">
       <bo>
         <seg>classifier</seg>
         <seg>RAM</seg>
       </bo>
-      <position x="251.46874618530273" y="93.0"/>
+      <position x="251.46874618530273" y="148.0"/>
       <size width="86.81770706176758" height="35.0"/>
     </element>
-    <element uuid="bef5be81-fdc9-48c1-a9fa-ef124c8a41fb" manual="true">
-      <element uuid="41374844-8fb1-4f54-bcbb-1bf23dcc3e9f" manual="true">
+    <element uuid="93fc26c3-bf61-41eb-97b8-7ef20a88ab5c" manual="true">
+      <element uuid="114a269d-f51d-440a-afee-d71fc8492450" manual="true">
         <bo>
           <seg>realization</seg>
         </bo>
         <bendpoints>
-          <point x="235.46875" y="110.5"/>
-          <point x="247.46875" y="110.5"/>
+          <point x="235.46875" y="165.5"/>
+          <point x="247.46875" y="165.5"/>
         </bendpoints>
       </element>
       <bo>
         <seg>classifier</seg>
         <seg>RAM.Standard</seg>
       </bo>
-      <position x="86.83202743530273" y="93.0"/>
+      <position x="86.83202743530273" y="148.0"/>
       <size width="144.63671875" height="35.0"/>
     </element>
-    <element uuid="a7becdff-743d-4c25-9002-f9020f65f1ba" manual="true">
+    <element uuid="c1209f82-ef2d-47f8-807f-e3e63726b18c" manual="true">
       <bo>
         <seg>classifier</seg>
         <seg>read_data</seg>
       </bo>
-      <position x="264.10546493530273" y="368.0"/>
+      <position x="264.10546493530273" y="313.0"/>
       <size width="117.24087524414062" height="35.0"/>
     </element>
-    <element uuid="2771e2cc-c5c0-409b-9138-ebd845b5ecb3" manual="true">
-      <element uuid="37693365-3e8d-4ea2-b2cf-7eea66c82b21" manual="true">
+    <element uuid="81dc6490-19da-4e63-88e5-574bce6f1c61" manual="true">
+      <element uuid="ceb6796a-b867-4ff8-aa6e-5ae9f78d6aa3" manual="true">
         <bo>
           <seg>realization</seg>
         </bo>
         <bendpoints>
-          <point x="248.10546875" y="385.5"/>
-          <point x="260.10546875" y="385.5"/>
+          <point x="248.10546875" y="330.5"/>
+          <point x="260.10546875" y="330.5"/>
         </bendpoints>
       </element>
       <bo>
         <seg>classifier</seg>
         <seg>read_data.speed</seg>
       </bo>
-      <position x="86.83202743530273" y="368.0"/>
+      <position x="86.83202743530273" y="313.0"/>
       <size width="157.2734375" height="35.0"/>
     </element>
-    <element uuid="d54cfadd-5fb8-48fa-add0-f1d48962b4cb" manual="true">
+    <element uuid="cc46e2cd-b9a3-4a36-bfd5-c41d830c16a8" manual="true">
       <bo>
         <seg>classifier</seg>
         <seg>Real_Time</seg>
@@ -209,8 +250,8 @@
       <position x="288.51952743530273" y="478.0"/>
       <size width="121.65494537353516" height="35.0"/>
     </element>
-    <element uuid="d9a10dec-95b2-4cfb-8933-f8a60859ebd5" manual="true">
-      <element uuid="da4e8f4b-bd86-404c-a70e-7af4239ad68f" manual="true">
+    <element uuid="fe6bec7f-4ecd-4d2c-8f22-e1a56ad0d3a0" manual="true">
+      <element uuid="65266273-357b-4b68-8b2c-a252919dbec6" manual="true">
         <bo>
           <seg>realization</seg>
         </bo>
@@ -226,37 +267,111 @@
       <position x="86.83202743530273" y="478.0"/>
       <size width="181.6875" height="35.0"/>
     </element>
-    <element uuid="f459d0d3-8650-4eae-8d1e-c0be8721a989" manual="true">
+    <element uuid="360c497c-519f-4eb2-8814-3a63dfd3b768" manual="true">
       <bo>
         <seg>classifier</seg>
-        <seg>sensor</seg>
+        <seg>RMag</seg>
       </bo>
-      <position x="244.07291793823242" y="148.0"/>
-      <size width="97.20833206176758" height="35.0"/>
+      <position x="523.6718559265137" y="148.0"/>
+      <size width="87.56640243530273" height="35.0"/>
     </element>
-    <element uuid="ce020b97-d86e-48b7-be39-82b3132eb8d5" manual="true">
-      <element uuid="76036e6d-ad23-46d2-a11a-ffc2af11a8f5" manual="true">
+    <element uuid="847744fb-5fce-4586-83d4-aa4ba638b462" manual="true">
+      <element uuid="951a90c5-7bb8-4718-a479-14971020a7a2" manual="true">
         <bo>
           <seg>realization</seg>
         </bo>
         <bendpoints>
-          <point x="228.0729217529297" y="165.5"/>
-          <point x="240.0729217529297" y="165.5"/>
+          <point x="507.671875" y="165.5"/>
+          <point x="519.671875" y="165.5"/>
+        </bendpoints>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>RMag.Standard</seg>
+      </bo>
+      <position x="358.28644943237305" y="148.0"/>
+      <size width="145.38541412353516" height="35.0"/>
+    </element>
+    <element uuid="8affd3b6-cfcf-4c40-9495-f2cd938ebdb7" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>sensor</seg>
+      </bo>
+      <position x="518.5221366882324" y="203.0"/>
+      <size width="97.20833206176758" height="35.0"/>
+    </element>
+    <element uuid="710cc2a2-6bf6-4927-96e5-6d0d6d53b574" manual="true">
+      <element uuid="6dd9aab7-38af-4f4d-b44f-40c2c2da6194" manual="true">
+        <bo>
+          <seg>realization</seg>
+        </bo>
+        <bendpoints>
+          <point x="502.5221252441406" y="220.5"/>
+          <point x="514.5221557617188" y="220.5"/>
         </bendpoints>
       </element>
       <bo>
         <seg>classifier</seg>
         <seg>sensor.speed</seg>
       </bo>
-      <position x="86.83202743530273" y="148.0"/>
+      <position x="361.28124618530273" y="203.0"/>
       <size width="137.2408905029297" height="35.0"/>
+    </element>
+    <element uuid="a9a6bcb1-05ac-42a1-83cd-479be5e24da2" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>sensor_data_value</seg>
+      </bo>
+      <position x="86.83202743530273" y="93.0"/>
+      <size width="164.67578887939453" height="35.0"/>
+    </element>
+    <element uuid="95df9c5c-0875-4a70-b466-181dbff08e7b" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>set_speed_value</seg>
+      </bo>
+      <position x="404.28905868530273" y="38.0"/>
+      <size width="152.82032012939453" height="35.0"/>
+    </element>
+    <element uuid="5d52e708-c364-4b1f-abf0-2246b85485dc" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>SSD_Drive</seg>
+      </bo>
+      <position x="287.7838554382324" y="533.0"/>
+      <size width="123.1328125" height="35.0"/>
+    </element>
+    <element uuid="7f42ca5e-db51-45d6-a93b-e9bea72cf63d" manual="true">
+      <element uuid="48d93956-f199-47f6-bbff-9dd436c5e39d" manual="true">
+        <bo>
+          <seg>realization</seg>
+        </bo>
+        <bendpoints>
+          <point x="271.7838439941406" y="550.5"/>
+          <point x="283.7838439941406" y="550.5"/>
+        </bendpoints>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>SSD_Drive.Standard</seg>
+      </bo>
+      <position x="86.83202743530273" y="533.0"/>
+      <size width="180.9518280029297" height="35.0"/>
+    </element>
+    <element uuid="f5e0ea8e-7b3a-40e9-a24f-150e689211fb" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>status_value</seg>
+      </bo>
+      <position x="86.83202743530273" y="38.0"/>
+      <size width="126.86328125" height="35.0"/>
     </element>
     <bo>
       <seg>package</seg>
       <seg>hulajnoga</seg>
     </bo>
     <position/>
-    <size width="429.61587142944336" height="580.0"/>
+    <size width="720.399730682373" height="635.0"/>
   </element>
   <config type="package" connectionPrimaryLabelsVisible="false">
     <enabledAadlProperties/>
