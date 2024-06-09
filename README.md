@@ -25,7 +25,7 @@
   - Complete (system) - system
 - **Przepływy**:
   - End-to-End Flows
-- Model
+- Model ![alt text](https://github.com/jankrk/Systemy-czasu-rzeczywistego-hulajnoga-elektryczna/blob/main/model.png)
 - Proponowane metody analizy modelu, dostępne w Osate
   - Analyze Bus Load
   - Check Binding Constraints
